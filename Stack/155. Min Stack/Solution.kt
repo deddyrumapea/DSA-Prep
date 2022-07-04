@@ -5,7 +5,10 @@ class MinStack() {
 
     fun push(`val`: Int) {
         stack.add(`val`)
-        minStack.add(if (minStack.size > 0) Math.min(`val`, minStack.last()) else `val`)
+        minStack.add(
+            if (minStack.size > 0) Math.min(`val`, minStack.last()) 
+            else `val`
+        )
     }
 
     fun pop() {
@@ -26,14 +29,12 @@ class MinStack() {
     private var head: Node? = null
 
     fun push(`val`: Int) {
-        head =
-                if (head == null) Node(`val` = `val`, min = `val`)
-                else
-                        Node(
-                                `val` = `val`,
-                                min = Math.min(`val`, head?.min ?: Int.MAX_VALUE),
-                                next = head
-                        )
+        head = if (head == null) Node(`val` = `val`, min = `val`)
+        else Node(
+            `val` = `val`, 
+            min = Math.min(`val`, head?.min ?: Int.MAX_VALUE), 
+            next = head
+        )
     }
 
     fun pop() {
@@ -44,7 +45,11 @@ class MinStack() {
 
     fun getMin(): Int = head?.min ?: 0
 
-    private inner class Node(val `val`: Int, val min: Int, val next: Node? = null)
+    private inner class Node(
+        val `val`: Int, 
+        val min: Int, 
+        val next: Node? = null
+    )
 }
 
 /**
