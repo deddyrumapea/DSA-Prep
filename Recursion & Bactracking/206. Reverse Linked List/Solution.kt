@@ -1,42 +1,62 @@
-/**
- * Example: var li = ListNode(5) var v = li.`val` Definition for singly-linked list. class
- * ListNode(var `val`: Int) {
- * ```
- *     var next: ListNode? = null
- * ```
- * }
- */
+/*
+    2022/07/04
+    Iterative solution
+    Time complexity: O(n)
+    Space complexity: O(1)
+*/
 class Solution {
     fun reverseList(head: ListNode?): ListNode? {
-        var backwardHead: ListNode? = null
-        var forwardHead = head
-        while (forwardHead != null) {
-            val nextForwardHead = forwardHead.next
-            forwardHead.next = backwardHead
-            backwardHead = forwardHead
-            forwardHead = nextForwardHead
+        var prev: ListNode? = null
+        var current: ListNode? = head
+
+        while (current != null) {
+            val next = current.next // Temporary variable
+            current.next = prev // Re-reference next pointer to previous node
+            prev = current // Shift previous to current
+            current = next // Shift current to next
         }
-        return backwardHead
+
+        return prev
     }
 }
 
-/**
- * Example: var li = ListNode(5) var v = li.`val` Definition for singly-linked list. class
- * ListNode(var `val`: Int) {
- * ```
- *     var next: ListNode? = null
- * ```
- * }
- */
+/*
+    2022/07/04
+    Recursive solution
+    Time complexity: O(n)
+    Space complexity: O(n)
+*/
 class Solution {
     fun reverseList(head: ListNode?): ListNode? {
-        return reverseListInt(forwardHead = head, backwardHead = null)
+        return reverse(current = head, prev = null) // Return reversed list head
     }
 
-    private fun reverseListInt(forwardHead: ListNode?, backwardHead: ListNode?): ListNode? {
-        if (forwardHead == null) return backwardHead
-        val nextForwardHead = forwardHead.next
-        forwardHead.next = backwardHead
-        return reverseListInt(nextForwardHead, forwardHead)
+    private fun reverse(
+        current: ListNode?, 
+        prev: ListNode?
+    ): ListNode? {
+        if (current == null) return prev // If it's at the end of the list, return prev head
+        val next = current.next // Temporary variable
+        current.next = prev // Re-reference next pointer to previous node
+        return reverse(current = next, prev = current) // Shift current to next and prev to current
+    }
+}
+
+/*
+    2022/07/04
+    Recursive solution
+    Time complexity: O(n)
+    Space complexity: O(n)
+*/
+class Solution {
+    fun reverseList(head: ListNode?): ListNode? {
+        if (head == null) return null
+        var newHead = head
+        if (head.next != null) {
+            newHead = reverseList(head.next)
+            head.next.next = head
+            head.next = null
+        }
+        return newHead
     }
 }
