@@ -8,7 +8,7 @@
  */
 class Solution {
     fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
-        var tail = ListNode(0) // Used as a reference to merged list, init with dummy node
+        var tail = ListNode(0) // Used as a reference to the merged list, init with dummy node
         val head = tail // Used as a reference to the starting node
 
         var l1 = list1 // Create mutable variable for list1
