@@ -8,23 +8,29 @@
  */
 class Solution {
     fun mergeTwoLists(list1: ListNode?, list2: ListNode?): ListNode? {
-        var node = ListNode(0)
-        var head = node
+        var tail = ListNode(0) // Tail is used as a reference to merged list
+        val head = tail // Head is used to reference to the starting node
 
-        var list1Head = list1
-        var list2Head = list2
+        var l1 = list1 // Create mutable variable for list1
+        var l2 = list2 // Create mutable variable for list2
 
-        while (list1Head != null || list2Head != null) {
-            if (list2Head == null || ((list1Head != null) && (list1Head?.`val` < list2Head?.`val`))
-            ) {
-                node.next = list1Head
-                list1Head = list1Head?.next
+        while (l1 != null && l2 != null) {
+            if (l1.`val` < l2.`val`) {
+                tail.next = l1 // Reference l1 as the next node of tail
+                l1 = l1.next // Move to the next l1 node
             } else {
-                node.next = list2Head
-                list2Head = list2Head?.next
+                tail.next = l2 // Reference l1 as the next node of tail
+                l2 = l2.next // Move to the next l2 node
             }
-            node = node.next
+
+            // After the next node of tail is referenced,
+            // move tail to the next node
+            tail = tail.next 
         }
+
+        // If either of the lists is already run out of node, 
+        // reference the next node of tail to the other list
+        tail.next = if (l1 == null) l2 else l1
 
         return head.next
     }
