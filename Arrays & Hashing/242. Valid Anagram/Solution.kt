@@ -25,8 +25,8 @@ class Solution {
             countT[t[i]] = 1 + (countT[t[i]] ?: 0)
         }
 
-        for (entry in countS) {
-            if (countT[entry.key] != entry.value) return false
+        for (entry in countT) {
+            if (countS[entry.key] != entry.value) return false
         }
 
         return true
