@@ -1,21 +1,15 @@
 class Solution {
     fun maxProfit(prices: IntArray): Int {
-        if (prices.size == 1) return 0
-
-        var left = 0
-        var right = 1
+        var buyIndex = 0
+        var sellIndex = 0
         var maxP = 0
-
-        while (right <= prices.lastIndex) {
-            if (prices[left] < prices[right]) {
-                maxP = Math.max(maxP, prices[right] - prices[left])
-            } else {
-                left = right
-            }
-
-            ++right
+        
+        while(sellIndex <= prices.lastIndex) {
+            if (prices[sellIndex] < prices[buyIndex]) buyIndex = sellIndex
+            maxP = Math.max(prices[sellIndex] - prices[buyIndex], maxP)
+            ++sellIndex
         }
-
+        
         return maxP
     }
 }
