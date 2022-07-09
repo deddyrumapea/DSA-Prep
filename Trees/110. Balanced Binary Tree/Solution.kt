@@ -16,8 +16,8 @@ class Solution {
     private fun dfs(node: TreeNode?): Result {
         if (node == null) return Result(isBalanced = true, height = 0)
 
-        val left = dfs(node?.left)
-        val right = dfs(node?.right)
+        val left = dfs(node.left)
+        val right = dfs(node.right)
         
         return Result(
             isBalanced = left.isBalanced && right.isBalanced && (Math.abs(left.height - right.height) <= 1),
