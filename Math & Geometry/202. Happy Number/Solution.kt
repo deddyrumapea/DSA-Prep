@@ -1,4 +1,6 @@
 // Solved in ~21 minutes
+// Time complexity: O(n)
+// Space complexity: O(n)
 class Solution {
     fun isHappy(n: Int): Boolean {
         val checked = mutableSetOf<Int>()
@@ -21,6 +23,8 @@ class Solution {
     }
 }
 
+// Time complexity: O(n)
+// Space complexity: O(n)
 class Solution {
     fun isHappy(n: Int): Boolean {
         val checked = mutableSetOf<Int>()
@@ -52,4 +56,32 @@ class Solution {
     } 
 }
 
-// TODO: add Floyd's cycle finding algorithm here
+// Time complexity: O(n)
+// Space complexity: O(1)
+class Solution {
+    fun isHappy(n: Int): Boolean {
+        var slow = n
+        var fast = sumOfSquares(n)
+
+        while (fast != 1) {
+            if (slow == fast) return false
+            slow = sumOfSquares(slow)
+            fast = sumOfSquares(sumOfSquares(fast))
+        }
+
+        return true
+    }
+
+    private fun sumOfSquares(num: Int): Int {
+        var mNum = num
+        var sum = 0
+        
+        while (mNum > 0) {
+            val digit = mNum % 10
+            sum += digit * digit
+            mNum = mNum / 10
+        }
+
+        return sum
+    }
+}
