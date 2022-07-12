@@ -17,13 +17,13 @@ class Solution {
 class Solution {
     fun maxProfit(prices: IntArray): Int {
         var buy = Int.MAX_VALUE
-        var sell = 0
+        var maxP = 0
 
         for (i in prices.indices) {
             buy = Math.min(buy, prices[i])
-            sell = Math.max(sell, prices[i] - buy)
+            maxP = Math.max(maxP, prices[i] - buy)
         }
 
-        return sell
+        return maxP
     }
 }
