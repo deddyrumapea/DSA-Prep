@@ -1,14 +1,14 @@
 class Solution {
     fun climbStairs(n: Int): Int {
-        var one = 1
-        var two = 0
-
-        for (i in 1..n) {
-            val temp = one
-            one += two
-            two = temp
+        var currWays = 1
+        var prevWays = 1
+        
+        for (i in (n - 2) downTo 0) {
+            val totalWays = currWays + prevWays
+            currWays = prevWays
+            prevWays = totalWays
         }
-
-        return one
+        
+        return prevWays
     }
 }
