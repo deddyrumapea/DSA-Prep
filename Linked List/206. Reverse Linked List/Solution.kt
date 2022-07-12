@@ -16,7 +16,7 @@ class Solution {
             current = next // Shift current to next
         }
 
-        return prev
+        return prev // At this point, prev will contain the last node of the original list
     }
 }
 
