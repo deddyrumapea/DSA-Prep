@@ -9,21 +9,21 @@
  */
 class Solution {
     fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
-        val newHead = ListNode(0).apply{ next = head }
-        var slow = newHead
-        var fast = newHead
+        val dummyNode = ListNode(0)
+        dummyNode.next = head
         
-        for (i in 1..n) {
-            fast = fast?.next
+        var left = dummyNode
+        var right = dummyNode
+        
+        for (i in 0..(n - 1)) right = right?.next
+        
+        while (right?.next != null) {
+            left = left?.next
+            right = right?.next
         }
         
-        while (fast?.next != null){
-            fast = fast?.next
-            slow = slow?.next
-        }
-        
-        slow?.next = slow?.next?.next
-        
-        return newHead?.next
+        left?.next = left?.next?.next
+                
+        return dummyNode.next
     }
 }
