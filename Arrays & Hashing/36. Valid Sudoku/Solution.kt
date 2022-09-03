@@ -3,19 +3,17 @@
 // Space complexity: O(3 * 3 + 9 + 9) = O(1)
 class Solution {
     fun isValidSudoku(board: Array<CharArray>): Boolean {
-        val boxChars = Array(3) { Array(3) { mutableSetOf<Char>() }  }
-        val rowChars = mutableSetOf<Char>()
+        val boxSet = Array(3) { Array(3) { mutableSetOf<Char>() } }
         
         for (i in 0..8) {
-            val colChars = mutableSetOf<Char>()
+            val rowSet = mutableSetOf<Char>()
+            val colSet = mutableSetOf<Char>()
             
             for (j in 0..8) {
-                if (board[i][j] != '.' && !boxChars[i / 3][j / 3].add(board[i][j])) return false
-                if (board[i][j] != '.' && !colChars.add(board[i][j])) return false
-                if (board[j][i] != '.' && !rowChars.add(board[j][i])) return false
+                if (board[i][j] != '.' && !rowSet.add(board[i][j])) return false
+                if (board[j][i] != '.' && !colSet.add(board[j][i])) return false
+                if (board[i][j] != '.' && !boxSet[i / 3][j / 3].add(board[i][j])) return false
             }
-            
-            rowChars.clear()
         }
         
         return true
