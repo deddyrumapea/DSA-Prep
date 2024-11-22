@@ -1,3 +1,27 @@
+// Time complexity: O(m * n)
+// Space complexity: O(n)
+
+class Solution {
+    fun groupAnagrams(strs: Array<String>): List<List<String>> {
+        val groups = HashMap<String, MutableList<String>>()
+
+        for (str in strs) {
+            val charCount = IntArray(26) { 0 }
+
+            for (char in str.toCharArray()) {
+                charCount[char - 'a']++
+            }
+
+            val charCountStr = charCount.joinToString()
+            
+            if (groups[charCountStr] != null) groups[charCountStr]?.add(str)
+            else groups[charCountStr] = mutableListOf(str)
+        }
+
+        return groups.map { it.value }
+    }
+}
+
 // Time complexity: O(m * nlogn)
 // Space complexity: O(n)
 class Solution {
