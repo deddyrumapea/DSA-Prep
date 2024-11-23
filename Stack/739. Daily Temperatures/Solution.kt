@@ -6,7 +6,7 @@ class Solution {
         val result = IntArray(temperatures.size)
 
         for (i in temperatures.indices) {
-            while (stack.isNotEmpty() && temperatures[i] > temperatures[stack.peekLast()]) {
+            while (stack.isNotEmpty() && temperatures[i] > temperatures[stack.last()]) {
                 val prevIndex = stack.removeLast()
                 result[prevIndex] = i - prevIndex
             }
