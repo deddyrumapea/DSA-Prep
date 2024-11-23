@@ -5,29 +5,35 @@ class Solution {
     fun searchMatrix(matrix: Array<IntArray>, target: Int): Boolean {
         var top = 0
         var bottom = matrix.lastIndex
-        
+
         while (top <= bottom) {
             val vMid = top + (bottom - top) / 2
             val row = matrix[vMid]
-            
-            if (target in row[0]..row[row.lastIndex]) {
-                var left = 0
-                var right = row.lastIndex
 
-                while (left <= right) {
-                    val hMid = left + (right - left) / 2
-                    if (row[hMid] == target) return true
-                    if (row[hMid] < target) left = hMid + 1
-                    else right = hMid - 1
+            when {
+                target in row.first()..row.last() -> {
+                    var left = 0
+                    var right = row.lastIndex
+
+                    while (left <= right) {
+                        val hMid = left + (right - left) / 2
+                        
+                        when {
+                            row[hMid] == target -> return true
+                            row[hMid] < target -> left = hMid + 1
+                            else -> right = hMid -1
+                        }
+                    }
+
+                    return false
                 }
-                
-                return false
+
+                row.last() < target -> top = vMid + 1
+
+                row.first() > target -> bottom = vMid - 1
             }
-            
-            if (row[0] > target) bottom = vMid - 1
-            else top = vMid + 1
         }
-        
+
         return false
     }
 }
