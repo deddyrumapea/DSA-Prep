@@ -1,8 +1,9 @@
 class Solution {
     fun evalRPN(tokens: Array<String>): Int {
         val stack = ArrayDeque<Int>()
+
         for (token in tokens) {
-            when(token) {
+            when (token) {
                 "+" -> stack.addFirst(stack.removeFirst() + stack.removeFirst())
                 "-" -> {
                     val x = stack.removeFirst()
@@ -18,7 +19,7 @@ class Solution {
                 else -> stack.addFirst(token.toInt())
             }
         }
-        
-        return stack.peekFirst()
+
+        return stack.first()
     }
 }
