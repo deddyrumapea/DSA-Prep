@@ -4,9 +4,9 @@ class Solution {
         
         for (char in s) {
             when {
-                char == ')' && stack.last() == '(' -> stack.removeLast()
-                char == '}' && stack.last() == '{' -> stack.removeLast()
-                char == ']' && stack.last() == '[' -> stack.removeLast()
+                char == ')' && stack.lastOrNull() == '(' -> stack.removeLast()
+                char == '}' && stack.lastOrNull() == '{' -> stack.removeLast()
+                char == ']' && stack.lastOrNull() == '[' -> stack.removeLast()
                 else -> stack.addLast(char)
             }
         }
