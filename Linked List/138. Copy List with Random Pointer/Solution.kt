@@ -11,19 +11,19 @@
 
 class Solution {
     fun copyRandomList(node: Node?): Node? {
-        val oldToCopy = mutableMapOf<Node, Node>()
-        
-        var oldNode = node
-        while (oldNode != null) {
-            oldToCopy[oldNode] = Node(oldNode.`val`)
-            oldNode = oldNode.next
+        val originalToCopy = mutableMapOf<Node, Node>()
+
+        var originalNode = node
+        while (originalNode != null) {
+            originalToCopy[originalNode] = Node(originalNode.`val`)
+            originalNode = originalNode.next
         }
-        
-        for (entry in oldToCopy) {
-            entry.value.next = oldToCopy[entry.key.next]
-            entry.value.random = oldToCopy[entry.key.random]
+
+        for ((original, copy) in originalToCopy) {
+            copy.next = originalToCopy[original.next]
+            copy.random = originalToCopy[original.random]
         }
-        
-        return oldToCopy[node]
+
+        return originalToCopy[node]
     }
 }
