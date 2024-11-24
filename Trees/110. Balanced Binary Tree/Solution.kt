@@ -18,15 +18,17 @@ class Solution {
 
         val left = dfs(node.left)
         val right = dfs(node.right)
-        
+
+        val isBalanced = Math.abs(left.height - right.height) <= 1
+
         return Result(
-            isBalanced = left.isBalanced && right.isBalanced && (Math.abs(left.height - right.height) <= 1),
-            height = 1 + Math.max(left.height, right.height)
+            isBalanced = isBalanced && left.isBalanced && right.isBalanced,
+            height = 1 + Math.max(left.height, right.height),
         )
     }
 
     private data class Result(
         val isBalanced: Boolean,
-        val height: Int
+        val height: Int,
     )
 }
