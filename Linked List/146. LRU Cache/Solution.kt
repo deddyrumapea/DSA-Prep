@@ -1,8 +1,10 @@
-class LRUCache(private val capacity: Int) {
-
+class LRUCache(
+    private val capacity: Int,
+) {
+    
     private val keyToNode = hashMapOf<Int, Node>()
-    private val left = Node(0, 0) // Least recent
-    private val right = Node(0, 0) // Most recent
+    private val left = Node(0, 0) // Least Recent
+    private val right = Node(0, 0) // Most Recent
 
     init {
         left.next = right
@@ -22,8 +24,10 @@ class LRUCache(private val capacity: Int) {
         keyToNode[key]?.let { removeCache(it.key) }
 
         insertCache(key, value)
-        
-        if (keyToNode.size > capacity) left.next?.let { removeCache(it.key) }
+
+        if (keyToNode.size > capacity) {
+            left.next?.let { removeCache(it.key) }
+        }
     }
 
     private fun removeCache(key: Int) {
@@ -39,12 +43,12 @@ class LRUCache(private val capacity: Int) {
     }
 
     private fun insertCache(key: Int, value: Int) {
-        val lastRecent = right.prev
+        val mostRecent = right.prev
         val newNode = Node(key, value)
 
-        lastRecent?.next = newNode
-        newNode.prev = lastRecent
-        
+        mostRecent?.next = newNode
+        newNode.prev = mostRecent
+
         right.prev = newNode
         newNode.next = right
 
@@ -52,9 +56,16 @@ class LRUCache(private val capacity: Int) {
     }
 
     private data class Node(
-        val key: Int, 
+        val key: Int,
         val value: Int,
         var next: Node? = null,
-        var prev: Node? = null
+        var prev: Node? = null,
     )
 }
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
