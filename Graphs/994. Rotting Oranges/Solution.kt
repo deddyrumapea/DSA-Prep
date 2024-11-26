@@ -37,11 +37,10 @@ class Solution {
 
                     grid[x][y] = 2
                     queue.addLast(intArrayOf(x, y))
-
                     --fresh
                 }
             }
-            
+
             if (queue.isNotEmpty()) ++time
         }
 
