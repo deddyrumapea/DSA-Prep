@@ -15,7 +15,10 @@ class Solution {
                 ++carry
             }
         }
-        
-        return if (carry > 0) intArrayOf(carry, *digits) else digits
+
+        return when (carry > 0) {
+            true -> intArrayOf(carry, *digits)
+            false -> digits
+        }
     }
 }
