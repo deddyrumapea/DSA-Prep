@@ -3,34 +3,30 @@ class Solution {
         if (grid.isEmpty()) return 0
 
         val queue = ArrayDeque<IntArray>()
-
-        var freshCount = 0
-        var count = 0
+        var fresh = 0
 
         // put the possition of all rotten oranges in queue
         // count the number of fresh oranges
         for (row in grid.indices) {
             for (col in grid[row].indices) {
                 when (grid[row][col]) {
-                    1 -> ++freshCount
+                    1 -> ++fresh
                     2 -> queue.addLast(intArrayOf(row, col))
                 }
             }
         }
 
-        if (freshCount == 0) return 0
+        if (fresh == 0) return 0
 
+        var time = 0
         val dirs = arrayOf(
             intArrayOf(1, 0),
             intArrayOf(-1, 0),
             intArrayOf(0, 1),
             intArrayOf(0, -1),
         )
-
         while (queue.isNotEmpty()) {
-            ++count
-
-            for (i in queue.indices) {
+            repeat (queue.count()) {
                 val point = queue.removeFirst()
 
                 for (dir in dirs) {
@@ -42,13 +38,15 @@ class Solution {
                     grid[x][y] = 2
                     queue.addLast(intArrayOf(x, y))
 
-                    --freshCount
+                    --fresh
                 }
             }
+            
+            if (queue.isNotEmpty()) ++time
         }
 
-        return when (freshCount == 0) {
-            true -> count - 1
+        return when (fresh == 0) {
+            true -> time
             false -> -1
         }
     }
